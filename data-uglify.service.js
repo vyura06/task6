@@ -62,6 +62,39 @@ class UglifyService {
     return strArr;
   }
 
-  
+  uglifyString(str) {
+    const uglifyMethodIndex = this.randomizeFn(3, 0);
+    const indexToUglify = this.randomizeFn(str.length - 1, 0);
+    const strArr = str.split("");
+
+    const result =
+      this.uglifyMethods[uglifyMethodIndex]
+        .call(this, strArr, indexToUglify)
+        .join("");
+
+    return result;
+  }
+
+  uglify(data, locale) {
+    const result = [...data];
+
+    this.Locale = locale;
+    this.PossibleError = this.randomizeFn(101, 0) / 100;
+
+    for (let i = 0; i < this.errorsCount + this.possibleError; i++) {
+      const indexToUglify = this.randomizeFn(result.length, 0);
+      result[indexToUglify] = this.uglifyString(result[indexToUglify]);
+    }
+
+    return result;
+  }
+}
+
+function getCharsByCodes(min, max) {
+  const chars = [];
+  for (let i = min; i < max + 1; i++)
+    chars.push(String.fromCharCode(i));
+  return chars;
+}
 
 module.exports = new UglifyService();
