@@ -48,7 +48,11 @@ const server = http.createServer((req, res) => {
       const response = getNewPage(req.url);
       res.end(JSON.stringify(response));
       return;
-    } 
+    }  else if (req.url.startsWith("/data/csv")) {
+      const csv = parser.parse(fakeData);
+      res.end(csv);
+      return;
+    }
 
     const filePath = getFilePath(getFileUrl(req.url));
     const mimeType = mimeLookup[path.extname(filePath)];

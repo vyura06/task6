@@ -20,6 +20,7 @@ region.addEventListener("change", generator);
 errors_control.addEventListener("change", generator);
 errors_range.addEventListener("change", generator);
 seed.addEventListener("change", generator);
+csv.addEventListener("click", downloadCSV);
 generateSeed.addEventListener("click", () => {
   seed.value = random();
   generator();
@@ -68,6 +69,21 @@ function fillTable(data) {
     const tr = createRow(row);
     tbody.appendChild(tr);
   }
+}
+
+async function downloadCSV() {
+  const data = await fetch("/data/csv");
+  const csv = await data.text();
+
+  const link = document.createElement("a");
+  link.id = "download-csv";
+  link.setAttribute(
+    "href", "data:text/plain;charset=utf-8," + encodeURIComponent(csv)
+  );
+  link.setAttribute("download", "faker.csv");
+  document.body.appendChild(link);
+  document.querySelector("#download-csv").click();
+  document.body.removeChild(link);
 }
 
 function createRow(row) {
