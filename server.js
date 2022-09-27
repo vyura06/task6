@@ -27,11 +27,12 @@ const getNewPage = url => {
   const page = +myURL.searchParams.get("page");
   const seed = +myURL.searchParams.get("seed");
   const locale = myURL.searchParams.get("locale");
-  const errors = +myURL.searchParams.get("errors");
+  const errors_control = +myURL.searchParams.get("errors_control");
+  const errors_range = +myURL.searchParams.get("errors_range");
 
   setLocale(locale);
   setSeed(page + seed);
-  setErrors(errors);
+  setErrors(errors_control || errors_range);
 
   if (page === 1)
     fakeData = [];
