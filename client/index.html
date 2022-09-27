@@ -28,7 +28,8 @@
 
         <label class="form-label">
           Количество ошибок на запись:
-          <input id="errors" type="number" value="0" step="0.25" max="1000" min="0" class="form-control" placeholder="Error count">
+          <input id="errors_control" type="number" value="0" step="0.25" max="1000" min="0" class="form-control" placeholder="Error count" onchange="errors_range.value = errors_control.value">
+          <input id="errors_range" type="range" value="0" step="0.25" min="0" max="1000" class="form-range" oninput="errors_control.value = errors_range.value" onchange="errors_control.value = errors_range.value">
         </label>
 
         <label class="form-label">

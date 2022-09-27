@@ -1,7 +1,8 @@
 "use strict";
 
 const region = document.getElementById("region"),
-  errors = document.getElementById("errors"),
+  errors_control = document.getElementById("errors_control"),
+  errors_range = document.getElementById("errors_range"),
   seed = document.getElementById("seed"),
   generateSeed = document.getElementById("generate-seed"),
   tbody = document.getElementById("tbody")
@@ -16,7 +17,8 @@ const generator = debounce(rerender);
 generator();
 
 region.addEventListener("change", generator);
-errors.addEventListener("change", generator);
+errors_control.addEventListener("change", generator);
+errors_range.addEventListener("change", generator);
 seed.addEventListener("change", generator);
 generateSeed.addEventListener("click", () => {
   seed.value = random();
@@ -42,7 +44,8 @@ async function rerender() {
 }
 
 async function generate(page = PAGE) {
-  errors.value = +errors.value ?? 0;
+  errors_control.value = +errors_control.value ?? 0;
+  errors_range.value = +errors_range.value ?? 0;
   seed.value = +seed.value ?? 0;
   const data = await getData(page);
   fillTable(data);
@@ -53,7 +56,8 @@ async function getData(page) {
     await fetch("/data?" +
       `page=${page}&` +
       `seed=${seed.value}&` +
-      `errors=${errors.value}&` +
+      `errors_control=${errors_control.value}&` +
+      `errors_range=${errors_range.value}&` +
       `locale=${region.value}&`
     );
   return await data.json();
