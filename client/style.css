@@ -1,0 +1,46 @@
+body {
+  height: 100vh;
+  padding: 50px 0 0;
+  background-color: black;
+  
+}
+
+main {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  padding: 0 50px;
+  background-color: darkgray;
+}
+
+h1, h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+aside {
+  position: fixed;
+  top: 170px;
+  left: 50px;
+  width: 20%;
+  min-width: 200px;
+}
+
+aside > * {
+  width: 100%;
+}
+
+table {
+  width: 67vw!important;
+  height: 100%;
+}
+
+table td {
+  word-break: break-all;
+}
+
+.table-placeholder {
+  text-align: center;
+  margin: 0;
+  padding: 10px;
+}
